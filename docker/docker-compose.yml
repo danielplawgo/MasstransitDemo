@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+    ms-db:
+        container_name: shop-db
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            SA_PASSWORD: Your_password123
+            ACCEPT_EULA: Y
+        ports:
+            - 1433:1433
+        volumes:
+         - ./sqlserver/data:/var/opt/mssql/data
+         - ./sqlserver/log:/var/opt/mssql/log
+         - ./sqlserver/scripts:/scripts/
+
+    ms-seq:
+        image: datalust/seq 
+        environment:
+          - ACCEPT_EULA=Y
+        ports:
+          - 5341:80
